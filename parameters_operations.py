@@ -1,6 +1,5 @@
 import re
 
-
 def cofigure_siamese_text(siamese_csv_name):
     siamese_csv_name = siamese_csv_name.replace('cloneSize-','')
     siamese_csv_name = siamese_csv_name.replace('ngramSize-','')

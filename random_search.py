@@ -106,26 +106,22 @@ def format_dimension(parms):
             'origBoost': parms[9],
             'simThreshold': parms[10]}
 
-def evaluate_tool(parms, current_datetime, models):
+def evaluate_tool(parms, exec_time_grid):
     parms = format_dimension(parms)
     parms['algorithm'] = 'random_search'
-    parms['output_folder'] = f'output_{parms["algorithm"]}/{current_datetime}'
+    parms['output_folder'] = f'output/{parms["algorithm"]}/{exec_time_grid}'
     parms['logic_process'] = os.getenv('LOGIC_PROCESS')
 
     if not os.path.exists(parms['output_folder']):
         os.makedirs(parms['output_folder'])
     
-    if parms['logic_process'] == 'models':
-        parms['mrr_model'] = models['mrr_model']
-        parms['mop_model'] = models['mop_model']
-    
     execute_siamese_search(**parms)
 
-def execute(combinations, current_datetime):
+def execute(combinations, exec_time_grid):
     algorithm = 'random_search'
 
-    grid_search_time = timedelta(days=2, hours=6, minutes=10, seconds=49)
     start_total_time = datetime.now()
+    current_datetime = datetime.now()
 
     for i, combination in enumerate(combinations):
         i += 1
@@ -134,7 +130,7 @@ def execute(combinations, current_datetime):
         print(f"Combination {combination}")
         
         start_time = datetime.now()
-        evaluate_tool(combination, current_datetime, models)
+        evaluate_tool(combination, current_datetime)
         end_time = datetime.now()
         exec_time = end_time - start_time
         total_execution_time = end_time - start_total_time
@@ -144,23 +140,23 @@ def execute(combinations, current_datetime):
         open(result_time_path, 'a').write('Success execution ')
         open(result_time_path, 'a').write( f'{combination} \nRuntime: {exec_time}\n\n')
         
-        if grid_search_time < total_execution_time:
+        if exec_time_grid < total_execution_time:
             break
 
     print(f"Total execution time: {total_execution_time}")
     open(result_time_path, 'a').write(f"\nTotal execution time: {total_execution_time}\n")
 
 
-def execute_random_search():
-    with open('parameters_grid_search.yml', 'r') as file:
-        grid_search_params = list(yaml.safe_load(file).values())
+def execute_random_search(exec_time_grid):
+    parameters_path = os.getenv("PARAMETERS_PATH")
+    with open(f'{parameters_path}/parameters_grid_search.yml', 'r') as file:
+        grid_search_params = yaml.safe_load(file)
+        grid_search_params = [v for v in grid_search_params.values()]
 
-    with open('parameters.yml', 'r') as file:
+    with open(f'{parameters_path}/parameters.yml', 'r') as file:
         param = yaml.safe_load(file)
 
     combinations = list(product(*grid_search_params))
     combinations = generate_all_combinations(combinations, param)
     print(len(combinations))
-    current_datetime = datetime.now()
-
-    execute(combinations, current_datetime)
+    execute(combinations, exec_time_grid)

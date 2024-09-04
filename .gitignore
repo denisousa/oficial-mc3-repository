@@ -5,6 +5,7 @@
 
 datasets/cut_stackoverflow_filtered
 datasets/qualitas_corpus_clean
+datasets/mini_qualitas_corpus_clean
 
 elasticsearch-ngram-*
 elasticsearch-ngram-*/*
@@ -54,10 +55,10 @@ configurations_random_search/*properties
 configurations_bayesian_search/*properties
 configurations_nsga2/*properties
 
-output_grid_search/*202*
-output_random_search/*202*
-output_bayesian_search/*202*
-output_nsga2/*202*
+output/grid_search/*202*
+output/random_search/*202*
+output/bayesian_search/*202*
+output/nsga2/*202*
 
 time_record/grid_search/*.txt
 time_record/random_search/*.txt

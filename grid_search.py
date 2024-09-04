@@ -2,6 +2,15 @@ from siamese_search import execute_siamese_search
 from datetime import datetime
 from itertools import product
 import re
+import os
+import yaml
+
+parameters_path = os.getenv("PARAMETERS_PATH")
+current_datetime = datetime.now()
+
+with open(f'{parameters_path}/parameters_grid_search.yml', 'r') as file:
+    param = yaml.safe_load(file)
+    param = [v for v in param.values()]
 
 def cofigure_text(text):
     text = text.replace('minCloneSize-','')
@@ -49,7 +58,7 @@ def get_combination(text):
 
 def format_dimension(parms):
     return {'ngramSize' : parms[0],
-            'minminCloneSize' : parms[1],
+            'minCloneSize' : parms[1],
             'QRPercentileNorm' : parms[2],
             'QRPercentileT2' : parms[3],
             'QRPercentileT1' : parms[4],
@@ -63,7 +72,7 @@ def format_dimension(parms):
 def evaluate_tool(parms):
     parms = format_dimension(parms)
     parms['algorithm'] = 'grid_search'
-    parms['output_folder'] = f'./output_{parms["algorithm"]}/{current_datetime}'
+    parms['output_folder'] = f'./output/{parms["algorithm"]}/{current_datetime}'
     execute_siamese_search(**parms)
 
 def execute_grid_search():
@@ -91,23 +100,4 @@ def execute_grid_search():
     print(f"Total execution time: {total_execution_time}")
     open(result_time_path, 'a').write(f"\nTotal execution time: {total_execution_time}\n")
     
-    return current_datetime
-
-# param = [
-#     [4, 6, 8], # ngram
-#     [6, 10], # minminCloneSize
-#     [8, 10], # QRPercentileNorm
-#     [8, 10], # QRPercentileT2
-#     [8, 10], # QRPercentileT1
-#     [8, 10], # QRPercentileOrig
-#     [-1, 10], # normBoost
-#     [-1, 10], # t2Boost
-#     [-1, 10], # t1Boost
-#     [-1, 10], # origBoost
-#     ['20%,40%,60%,80%', '30%,50%,70%,90%'], # simThreshold 
-# ]
-
-# combinations = list(product(*param))
-# current_datetime = datetime.now()
-
-current_datetime = datetime.now()
+    return exec_time

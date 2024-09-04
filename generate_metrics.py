@@ -463,7 +463,7 @@ def get_metrics(optimization_algorithms, temp):
 
         os.mkdir(f'result_metrics/{algorithm}/{filename_temp}')
 
-        directory = f'output_{algorithm}/{filename_temp}'
+        directory = f'output/{algorithm}/{filename_temp}'
         folder_result = f'result_metrics/{algorithm}/{filename_temp}'
         results_siamese_csv = get_files_in_folder(directory)
         mrr_by_siamese_result = {}

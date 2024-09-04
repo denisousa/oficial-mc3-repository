@@ -11,7 +11,6 @@ import datetime
 
 load_dotenv()
 
-
 def execute_siamese_index_properties(ngram):
     gc.collect()
     os.system("sync")
@@ -67,3 +66,5 @@ initial_quantity = int(os.getenv("INITIAL_CLUSTER_QUANTITY"))
 final_quantity = int(os.getenv("FINAL_CLUSTER_QUANTITY")) + 1
 clusters_range = range(initial_quantity, final_quantity)
 elastic_version = "elasticsearch-2.2.0"
+
+execute_indexing()

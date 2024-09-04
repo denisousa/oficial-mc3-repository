@@ -1,3 +1,5 @@
+## DENIS REMOVA OS BREAK DE TESTE E ARRUME OS YAML
+
 # Search Algorithms for MC3 Problem
 This repository contains implementations of search algorithms for solving the MC3 (Multi-objective Code Clone Configuration) problem.
 Additionally, it includes various files related to Elasticsearch configurations, I/O operations, and other supporting resources.
@@ -28,6 +30,7 @@ The `infrastructure.md` file contains a description of the infrastructure that w
 ## Notes
 - The project works exclusively for Ubuntu
 - You can make project settings in the .env file
+- If you want to do quick tests, use "mini_qualitas_corpus_clean" which is downloaded together with the other datasets.
 
 ### 0. Remove the need to use "sudo" command
 Run the command "sudo visudo" and make the following changes
@@ -43,7 +46,7 @@ Insert at the end of the file
 ### 1. Configure Java context to Siamese
 ```bash
 chmod +x java-install.sh
-java-install.sh
+./java-install.sh
 ```
 
 ### 2. Install and generate Siamese (.jar)
@@ -76,6 +79,4 @@ python download_datasource.py
 ```bash
 python main_exepriment.py
 ```
-
-
 

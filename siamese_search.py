@@ -40,7 +40,7 @@ def get_config_path(parms):
     origBoost = f'boOr_{parms["origBoost"]}_'
     simThreshold = f'simT_{parms["simThreshold"]}'
     config_name = ngramSize + clonesSize + QRPercentileNorm + QRPercentileT2 + QRPercentileT1 + QRPercentileOrig  + normBoost + t2Boost + t1Boost + origBoost + simThreshold
-    destination_file = f'./configurations_{parms["algorithm"]}'
+    destination_file = f'./configurations/{parms["algorithm"]}'
     return f'{destination_file}/{config_name}.properties'
 
 def generate_config_file(parms):
@@ -75,13 +75,6 @@ def generate_config_file(parms):
     return properties_path
 
 def execute_siamese_search(**parms):
-    if parms['logic_process'] == 'siamese':
-        siamese_logic(**parms)
-
-    if parms['logic_process'] == 'models':
-        model_logic(**parms)
-
-def siamese_logic(**parms):
     stop_cluster_elasticserach(parms["ngramSize"])
     execute_cluster_elasticserach(parms["ngramSize"])
     delete_indices_incorrect(parms["ngramSize"])

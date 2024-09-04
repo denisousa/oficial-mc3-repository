@@ -1,7 +1,3 @@
-'''
-NOTE: Only Works with pip install "numpy<1.24.0"
-'''
-
 import pandas as pd
 import random
 from siamese_operations import format_siamese_output
@@ -11,16 +7,15 @@ from skopt.space import Categorical
 from skopt.utils import use_named_args
 from siamese_search import execute_siamese_search
 from generate_metrics import calculate_all_metrics
-from datetime import datetime, timedelta
+from datetime import datetime
 from files_operations import most_recent_file
 import yaml
-import sys
 import os
 
 parameters_path = os.getenv("PARAMETERS_PATH")
-
 with open(f'{parameters_path}/parameters.yml', 'r') as file:
     param = yaml.safe_load(file)
+
 n = []
 
 for k,v in param.items():
@@ -52,8 +47,14 @@ def weighted_average(values, weights):
 
 @use_named_args(dimensions)
 def evaluate_tool(**parms):
+    global exec_time_grid_global
+    global mrr_weight_global
+    global mop_weight_global
+    
+    current_datetime = datetime.now()
+
     parms['algorithm'] = algorithm
-    parms['output_folder'] = f'./output_{parms["algorithm"]}/{current_datetime}'
+    parms['output_folder'] = f'./output/{parms["algorithm"]}/{current_datetime}'
     siamese_output_path = parms['output_folder']
 
     start_time = datetime.now()
@@ -75,35 +76,41 @@ def evaluate_tool(**parms):
     mrr = metrics["MRR (Mean Reciprocal Rank)"]
     mop = metrics["MOP (Mean Overall Precision)"]
 
-    result = weighted_average([mrr, mop], [0.5, 0.5])
+    result = weighted_average([mrr, mop], [mrr_weight_global, mop_weight_global])
     
     loss = float(result) * -1
 
-    if grid_search_time <= total_execution_time:
+    if exec_time_grid_global <= total_execution_time:
         print(f"Total execution time: {total_execution_time}")
         open(result_time_path, 'a').write(f"\nTotal execution time: {total_execution_time}\n")
         print(f'Last Result - mrr:{mrr} | parms: {list(parms.values())}')
-        sys.exit()
+        raise Exception("Finish Bayesian Search")
 
     print(f'\n \n \nloss: {loss}\n \n \n')
     return loss
 
 
-def execute_bayesian_search():
-    all_combinations = 3380
+def execute_bayesian_search(exec_time_grid, mrr_weight, mop_weight):
+    global exec_time_grid_global
+    global mrr_weight_global
+    global mop_weight_global
 
+    exec_time_grid_global = exec_time_grid
+    mrr_weight_global = mrr_weight
+    mop_weight_global = mop_weight
+
+    all_combinations = 4000
     seed = random.randint(1,51)
     print(f"SEED: {seed}\n")
-    open("seed.txt", 'a').write(f"{seed} - {current_datetime}")
 
-    result = gp_minimize(evaluate_tool,
-                         dimensions=dimensions,
-                         n_calls=all_combinations,
-                         random_state=seed)
+    try:
+        gp_minimize(evaluate_tool,
+                    dimensions=dimensions,
+                    n_calls=all_combinations,
+                    random_state=seed)
+    except:
+        pass    
     
-    
-    print(f'FINAL RESULT: {result}')
-
 columns_parms = ['minCloneSize',
         'ngramSize',
         'QRPercentileNorm',
@@ -116,9 +123,10 @@ columns_parms = ['minCloneSize',
         'origBoost',
         'simThreshold']
 
+mrr_weight_global = None
+mop_weight_global = None
+exec_time_grid_global = exec_time_grid_global = None
 algorithm = 'bayesian_search'
-current_datetime = datetime.now()
-grid_search_time = timedelta(days=2, hours=6, minutes=10, seconds=49)
 start_total_time = datetime.now()
 df_clones = pd.read_csv('datasets/formatted_oracle.csv')
 df_clones = filter_oracle(df_clones)

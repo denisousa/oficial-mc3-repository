@@ -32,7 +32,11 @@ datasource_list = [
     {
         "filename": "qualitas_corpus_clean.zip",
         "file_id": "1Cvm9pYddjB6_PzzqKUd0Ri6BV-fX6MuV",
-    }
+    },
+    {
+        "filename": "mini_qualitas_corpus_clean.zip",
+        "file_id": "1rph8OcDVUpBNycS_3x1bdouEX1zykdEL",
+    },
 ]
 
 def download_projects():

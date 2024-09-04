@@ -44,7 +44,7 @@ class MyProblem(Problem):
             combination_dict = transform_parameters_list_to_dict(combination)
             
             combination_dict['algorithm'] = algorithm_name
-            combination_dict['output_folder'] = f'./output_{combination_dict["algorithm"]}/{current_datetime}'
+            combination_dict['output_folder'] = f'./output/{combination_dict["algorithm"]}/{current_datetime}'
             siamese_output_path = combination_dict['output_folder']
             
             start_time = datetime.now()
