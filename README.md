@@ -29,7 +29,7 @@ The `infrastructure.md` file contains a description of the infrastructure that w
 - The project works exclusively for Ubuntu
 - You can make project settings in the .env file
 
-### 0. Remove the need to use sudo command
+### 0. Remove the need to use "sudo" command
 Run the command "sudo visudo" and make the following changes
 ```bash
 sudo visudo
@@ -40,12 +40,22 @@ Insert at the end of the file
 <your-user> ALL=(ALL) NOPASSWD: ALL
 ```
 
-### 1. Install and generate Siamese (.jar)
-Run the command "https://github.com/UCL-CREST/Siamese.git".
-Then follow the steps in the project's Readme to generate the file "siamese-0.0.6-SNAPSHOT.jar"
-Place the file in the "code" folder.
+### 1. Configure Java context to Siamese
+```bash
+chmod +x java-install.sh
+java-install.sh
+```
 
-### 2. install project dependencies to run the experiment
+### 2. Install and generate Siamese (.jar)
+```bash
+git clone https://github.com/UCL-CREST/Siamese.git
+cd Siamese
+mvn compile package
+cp -i target/siamese-0.0.*.jar .
+```
+Place the file in the "code" folde
+
+### 3. install project dependencies to run the experiment
 ```bash
 sudo apt install python3-venv
 python3 -m venv env
@@ -53,12 +63,16 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Download Qualitas Corpus, StackOverflow and Elasticsearch datasets
+### 4. Configure your .env
+Change the ".env_example" file to ".env".
+You can use the default settings, or you can change the settings in this file.
+
+### 5. Download Qualitas Corpus, StackOverflow and Elasticsearch datasets
 ```bash
 python download_datasource.py
 ```
 
-### 3. Execute Experiment
+### 6. Execute Experiment
 ```bash
 python main_exepriment.py
 ```
