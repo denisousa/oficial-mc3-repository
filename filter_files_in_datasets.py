@@ -15,7 +15,7 @@ def copy_files(file_paths, destination_folder):
         shutil.copy(file_path, destination_path)
 
 
-file_name = 'new_clones.csv'
+file_name = 'formatted_oracle.csv'
 df = pd.read_csv(file_name)
 column_file2 = df['file2'].tolist()
 

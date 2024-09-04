@@ -15,7 +15,7 @@ def download_file_from_google_drive(file_id, output_path):
     url = f"https://drive.google.com/uc?id={file_id}"
     gdown.download(url, output_path, quiet=False)
 
-def download_elasticsearch():
+def download_elasticsearch_tar_gz():
     ''' Download elasticsearch-2.2.0 and extract to disk. '''
     if not os.path.isfile('elasticsearch-2.2.0.tar.gz'):
         os.system('wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.0/elasticsearch-2.2.0.tar.gz')
@@ -38,9 +38,9 @@ datasource_list = [
 def download_projects():
     for datasource in datasource_list:
         download_file_from_google_drive(datasource["file_id"], datasource["filename"])
-        #unzip_file(datasource["filename"], extract_to_path)
+        unzip_file(datasource["filename"], extract_to_path)
         delete_folder_or_file(datasource["filename"])
     
-    download_elasticsearch()
+    download_elasticsearch_tar_gz()
 
 download_projects()

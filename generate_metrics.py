@@ -445,7 +445,7 @@ def get_metrics(optimization_algorithms, temp):
         'MOP',
         ]
 
-    df_clones = pd.read_csv('new_clones.csv')
+    df_clones = pd.read_csv('formatted_oracle.csv')
     df_clones = filter_oracle(df_clones)
 
     for algorithm, filename_temp in zip(optimization_algorithms, temp):

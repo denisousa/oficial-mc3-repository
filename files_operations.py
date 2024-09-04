@@ -30,7 +30,7 @@ def get_files_in_folder(folder_path):
     return [file_path.split('/')[-1] for file_path, _ in sorted_files]
 
 def cut_so_project():
-    df_clones = pd.read_csv('new_clones.csv')
+    df_clones = pd.read_csv('formatted_oracle.csv')
 
     so_path = '/home/denis/programming/siamese-optmization/Siamese/my_index/stackoverflow/stackoverflow_formatted'
     new_so_path = '/home/denis/programming/siamese-optmization/Siamese/my_index/cut_stackoverflow_filtered'

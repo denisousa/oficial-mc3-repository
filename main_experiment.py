@@ -5,7 +5,7 @@ from nsga2 import execute_nsga2
 from siamese_indexing import execute_indexing
 
 execute_indexing()
-execute_grid_search()
+current_datetime = execute_grid_search()
 execute_random_search()
 execute_bayesian_search()
 execute_nsga2()

@@ -1,7 +1,4 @@
-from models.random_forest_regressor_algorithm import get_forest_regressor_pipeline
-from models.xgboost_algorithm import get_xgboost_pipeline
 from siamese_search import execute_siamese_search
-from models.read_data import generate_model_data
 from datetime import datetime, timedelta
 from itertools import product
 import random
@@ -129,13 +126,6 @@ def execute(combinations, current_datetime):
 
     grid_search_time = timedelta(days=2, hours=6, minutes=10, seconds=49)
     start_total_time = datetime.now()
-
-    if os.getenv('LOGIC_PROCESS') == 'models':
-        X, y_mrr, y_mop, preprocessor = generate_model_data()
-        models = {
-            'mrr_model': get_forest_regressor_pipeline('mrr', X, y_mrr, preprocessor),
-            'mop_model': get_xgboost_pipeline('mop', X, y_mop, preprocessor)
-        }
 
     for i, combination in enumerate(combinations):
         i += 1

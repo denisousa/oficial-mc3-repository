@@ -67,6 +67,7 @@ def evaluate_tool(parms):
     execute_siamese_search(**parms)
 
 def execute_grid_search():
+    combinations = list(product(*param))
     algorithm = 'grid_search'
 
     start_total_time = datetime.now()
@@ -92,19 +93,21 @@ def execute_grid_search():
     
     return current_datetime
 
-param = [
-    [4, 6, 8], # ngram
-    [6, 10], # minminCloneSize
-    [8, 10], # QRPercentileNorm
-    [8, 10], # QRPercentileT2
-    [8, 10], # QRPercentileT1
-    [8, 10], # QRPercentileOrig
-    [-1, 10], # normBoost
-    [-1, 10], # t2Boost
-    [-1, 10], # t1Boost
-    [-1, 10], # origBoost
-    ['20%,40%,60%,80%', '30%,50%,70%,90%'], # simThreshold 
-]
+# param = [
+#     [4, 6, 8], # ngram
+#     [6, 10], # minminCloneSize
+#     [8, 10], # QRPercentileNorm
+#     [8, 10], # QRPercentileT2
+#     [8, 10], # QRPercentileT1
+#     [8, 10], # QRPercentileOrig
+#     [-1, 10], # normBoost
+#     [-1, 10], # t2Boost
+#     [-1, 10], # t1Boost
+#     [-1, 10], # origBoost
+#     ['20%,40%,60%,80%', '30%,50%,70%,90%'], # simThreshold 
+# ]
 
-combinations = list(product(*param))
+# combinations = list(product(*param))
+# current_datetime = datetime.now()
+
 current_datetime = datetime.now()

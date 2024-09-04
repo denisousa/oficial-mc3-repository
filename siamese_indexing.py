@@ -1,23 +1,13 @@
-"""
-Indexing
-r1, r2, and r3 starting from 4 to 24 (step of 4) - Siamese Research
-r1, r2, and r3 starting from 4 to 24 (step of 1 or 2) - Denis Research
-
-Search
-The query reduction thresholds should be somewhere around 1-15%
-
-"""
-import datetime
 import os
 import gc
 import subprocess
 from elasticsearch_operations import (
     execute_cluster_elasticserach,
     stop_cluster_elasticserach,
-    create_one_cluster_elasticserach,
-    change_authentication
+    create_one_cluster_elasticserach
 )
 from dotenv import load_dotenv
+import datetime
 
 load_dotenv()
 
@@ -31,13 +21,13 @@ def execute_siamese_index_properties(ngram):
     elastic_path = f'{elastic_base_path}/elasticsearch-ngram-{ngram}'
 
     if os.path.exists(elastic_path):
-        os.system(f'trash-put {elastic_path}')
+        os.system(f'rm -rf {elastic_path}')
 
     stop_cluster_elasticserach(ngram)
     create_one_cluster_elasticserach(ngram, elastic_version)
     execute_cluster_elasticserach(ngram)
 
-    configurations_path = "./configurations_to_index"
+    configurations_path = "./configurations/to_index"
 
     index_name = os.getenv("INDEX_NAME")
     index_name = f"{index_name}_n_gram_{ngram}"
@@ -76,5 +66,4 @@ def execute_indexing():
 initial_quantity = int(os.getenv("INITIAL_CLUSTER_QUANTITY"))
 final_quantity = int(os.getenv("FINAL_CLUSTER_QUANTITY")) + 1
 clusters_range = range(initial_quantity, final_quantity)
-#elastic_version = "elasticsearch-8.14.2"
 elastic_version = "elasticsearch-2.2.0"

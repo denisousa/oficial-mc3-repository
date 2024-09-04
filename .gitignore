@@ -3,6 +3,14 @@
 
 .env
 
+datasets/cut_stackoverflow_filtered
+datasets/qualitas_corpus_clean
+
+elasticsearch-ngram-*
+elasticsearch-ngram-*/*
+
+n_gram_*.properties
+
 n-gram-properties/n*
 
 error_siamese_execution.txt
@@ -17,11 +25,11 @@ new-env/
 result_metrics/*.csv
 my*
 
-configurations_to_index/*.properties
-configurations_grid_search/*.properties
-configurations_random_search/*.properties
-configurations_bayesian_search/*.properties
-configurations_nsga2/*.properties
+configurations/to_index/*.properties
+configurations/grid_search/*.properties
+configurations/random_search/*.properties
+configurations/bayesian_search/*.properties
+configurations/nsga2/*.properties
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

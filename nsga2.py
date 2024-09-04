@@ -5,7 +5,6 @@ from pymoo.operators.sampling.rnd import IntegerRandomSampling
 from pymoo.operators.crossover.pntx import SinglePointCrossover
 from nsga2_mutation import MyMutation
 from nsga2_problem import MyProblem
-from nsga2_utils import print_results
 import time
 
 def execute_nsga2():

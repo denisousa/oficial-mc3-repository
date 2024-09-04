@@ -38,7 +38,7 @@ def create_one_cluster_elasticserach(ngram, folder_name):
     if not os.path.exists(elasticsearch_path):
         os.makedirs(elasticsearch_path)
 
-    command_delete = f'trash-put {elasticsearch_path}/elasticsearch-ngram-{ngram}'
+    command_delete = f'rm -rf {elasticsearch_path}/elasticsearch-ngram-{ngram}'
     command_unzip = f'tar -xvf {folder_name}.tar.gz -C {elasticsearch_path}'
     command_rename = f'mv {elasticsearch_path}/{folder_name} {elasticsearch_path}/elasticsearch-ngram-{ngram}'
     elasticsearch_yml_path = f'{elasticsearch_path}/elasticsearch-ngram-{ngram}/config/elasticsearch.yml'

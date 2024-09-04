@@ -10,8 +10,10 @@ from nsga2_utils import get_all_parameters_combination, transform_parameters_lis
 import pandas as pd
 import time
 import yaml
+import os
 
-with open('parameters.yml', 'r') as file:
+parameters_path = os.getenv("PARAMETERS_PATH")
+with open(f'{parameters_path}/parameters.yml', 'r') as file:
     search_space = yaml.safe_load(file)
 
 search_space_values = list(search_space.values())
@@ -22,7 +24,7 @@ params_positions = {
 current_datetime = datetime.now()
 random_seed = int(time.time())
 algorithm_name = 'nsga2'
-df_clones = pd.read_csv('new_clones.csv')
+df_clones = pd.read_csv('datasets/formatted_oracle.csv')
 df_clones = filter_oracle(df_clones)
 
 class MyProblem(Problem):

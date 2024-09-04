@@ -1,6 +1,8 @@
 import yaml
+import os
 
-with open('parameters.yml', 'r') as file:
+parameters_path = os.getenv("PARAMETERS_PATH")
+with open(f'{parameters_path}/parameters.yml', 'r') as file:
     search_space = yaml.safe_load(file)
 
 search_space_values = list(search_space.values())

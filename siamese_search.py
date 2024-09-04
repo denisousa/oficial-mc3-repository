@@ -141,7 +141,7 @@ def model_logic(**parms):
 
     new_df = pd.DataFrame(parms_combination)
 
-    filename = f'{parms['output_folder']}/result.csv'
+    filename = f'{parms["output_folder"]}/result.csv'
     if os.path.exists(filename):
         existing_df = pd.read_csv(filename)
         combined_df = pd.concat([existing_df, new_df], ignore_index=True)

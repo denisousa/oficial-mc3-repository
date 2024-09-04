@@ -15,8 +15,11 @@ from datetime import datetime, timedelta
 from files_operations import most_recent_file
 import yaml
 import sys
+import os
 
-with open('parameters.yml', 'r') as file:
+parameters_path = os.getenv("PARAMETERS_PATH")
+
+with open(f'{parameters_path}/parameters.yml', 'r') as file:
     param = yaml.safe_load(file)
 n = []
 
@@ -117,7 +120,5 @@ algorithm = 'bayesian_search'
 current_datetime = datetime.now()
 grid_search_time = timedelta(days=2, hours=6, minutes=10, seconds=49)
 start_total_time = datetime.now()
-df_clones = pd.read_csv('new_clones.csv')
+df_clones = pd.read_csv('datasets/formatted_oracle.csv')
 df_clones = filter_oracle(df_clones)
-
-execute_bayesian_search()
