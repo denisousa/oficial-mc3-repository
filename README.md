@@ -58,6 +58,9 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
+### Unzip the  infrastructure-directory
+Unzip the `infrastructure-directory` file and leave the folders in the folder's origin
+
 ### 4. Configure your .env
 Change the `.env_example` file to `.env`.
 You can use the default settings, or you can change the settings in this file.
