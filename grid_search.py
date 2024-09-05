@@ -100,4 +100,4 @@ def execute_grid_search():
     print(f"Total execution time: {total_execution_time}")
     open(result_time_path, 'a').write(f"\nTotal execution time: {total_execution_time}\n")
     
-    return exec_time
+    return current_datetime, exec_time

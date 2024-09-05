@@ -21,14 +21,14 @@ params_positions = {
     "initial": [0] * 11,
     "final": [20, 10, 9, 9, 9, 9, 11, 11, 11, 11, 8] 
 }
-current_datetime = datetime.now()
 random_seed = int(time.time())
 algorithm_name = 'nsga2'
 df_clones = pd.read_csv('datasets/formatted_oracle.csv')
 df_clones = filter_oracle(df_clones)
 
 class MyProblem(Problem):
-    def __init__(self):
+    def __init__(self, current_datetime):
+        self.current_datetime = current_datetime
         super().__init__(n_var=11,
                          n_obj=2,
                          n_constr=0,
@@ -44,7 +44,7 @@ class MyProblem(Problem):
             combination_dict = transform_parameters_list_to_dict(combination)
             
             combination_dict['algorithm'] = algorithm_name
-            combination_dict['output_folder'] = f'./output/{combination_dict["algorithm"]}/{current_datetime}'
+            combination_dict['output_folder'] = f'./output/{combination_dict["algorithm"]}/{self.current_datetime}'
             siamese_output_path = combination_dict['output_folder']
             
             start_time = datetime.now()
@@ -52,14 +52,14 @@ class MyProblem(Problem):
             end_time = datetime.now()
             exec_time = end_time - start_time
 
-            result_time_path = f'time_record/{algorithm_name}/{current_datetime}.txt'
+            result_time_path = f'time_record/{algorithm_name}/{self.current_datetime}.txt'
             print(f"Runtime: {exec_time}")
             open(result_time_path, 'a').write(f'Success execution ')
             open(result_time_path, 'a').write( f'{combination} \nRuntime: {exec_time}\n\n')
 
             most_recent_siamese_output, _ = most_recent_file(siamese_output_path)
             df_siamese = format_siamese_output(siamese_output_path, most_recent_siamese_output)
-            folder_result = f'result_metrics/{algorithm_name}/{current_datetime}'
+            folder_result = f'result_metrics/{algorithm_name}/{self.current_datetime}'
             metrics = calculate_all_metrics(most_recent_siamese_output, df_siamese, df_clones, folder_result)
             
             all_mrr.append(-metrics["MRR (Mean Reciprocal Rank)"])

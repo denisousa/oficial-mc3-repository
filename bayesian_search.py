@@ -48,10 +48,11 @@ def weighted_average(values, weights):
 @use_named_args(dimensions)
 def evaluate_tool(**parms):
     global exec_time_grid_global
+    global current_datetime_global
     global mrr_weight_global
     global mop_weight_global
-    
-    current_datetime = datetime.now()
+
+    current_datetime = current_datetime_global
 
     parms['algorithm'] = algorithm
     parms['output_folder'] = f'./output/{parms["algorithm"]}/{current_datetime}'
@@ -92,8 +93,11 @@ def evaluate_tool(**parms):
 
 def execute_bayesian_search(exec_time_grid, mrr_weight, mop_weight):
     global exec_time_grid_global
+    global current_datetime_global
     global mrr_weight_global
     global mop_weight_global
+
+    current_datetime_global = datetime.now()
 
     exec_time_grid_global = exec_time_grid
     mrr_weight_global = mrr_weight
@@ -109,7 +113,9 @@ def execute_bayesian_search(exec_time_grid, mrr_weight, mop_weight):
                     n_calls=all_combinations,
                     random_state=seed)
     except:
-        pass    
+        pass
+
+    return current_datetime_global    
     
 columns_parms = ['minCloneSize',
         'ngramSize',
@@ -125,6 +131,7 @@ columns_parms = ['minCloneSize',
 
 mrr_weight_global = None
 mop_weight_global = None
+current_datetime_global = None
 exec_time_grid_global = exec_time_grid_global = None
 algorithm = 'bayesian_search'
 start_total_time = datetime.now()

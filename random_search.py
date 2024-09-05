@@ -145,7 +145,7 @@ def execute(combinations, exec_time_grid):
 
     print(f"Total execution time: {total_execution_time}")
     open(result_time_path, 'a').write(f"\nTotal execution time: {total_execution_time}\n")
-
+    return current_datetime
 
 def execute_random_search(exec_time_grid):
     parameters_path = os.getenv("PARAMETERS_PATH")
@@ -159,4 +159,4 @@ def execute_random_search(exec_time_grid):
     combinations = list(product(*grid_search_params))
     combinations = generate_all_combinations(combinations, param)
     print(len(combinations))
-    execute(combinations, exec_time_grid)
+    return execute(combinations, exec_time_grid)
