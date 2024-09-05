@@ -148,12 +148,11 @@ def execute(combinations, exec_time_grid):
     return current_datetime
 
 def execute_random_search(exec_time_grid):
-    parameters_path = os.getenv("PARAMETERS_PATH")
-    with open(f'{parameters_path}/parameters_grid_search.yml', 'r') as file:
+    with open('parameters/parameters_grid_search.yml', 'r') as file:
         grid_search_params = yaml.safe_load(file)
         grid_search_params = [v for v in grid_search_params.values()]
 
-    with open(f'{parameters_path}/parameters.yml', 'r') as file:
+    with open('parameters/parameters.yml', 'r') as file:
         param = yaml.safe_load(file)
 
     combinations = list(product(*grid_search_params))

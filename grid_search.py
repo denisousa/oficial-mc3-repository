@@ -2,13 +2,11 @@ from siamese_search import execute_siamese_search
 from datetime import datetime
 from itertools import product
 import re
-import os
 import yaml
 
-parameters_path = os.getenv("PARAMETERS_PATH")
 current_datetime = datetime.now()
 
-with open(f'{parameters_path}/parameters_grid_search.yml', 'r') as file:
+with open('parameters/parameters_grid_search.yml', 'r') as file:
     param = yaml.safe_load(file)
     param = [v for v in param.values()]
 

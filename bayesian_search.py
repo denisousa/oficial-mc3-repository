@@ -12,8 +12,7 @@ from files_operations import most_recent_file
 import yaml
 import os
 
-parameters_path = os.getenv("PARAMETERS_PATH")
-with open(f'{parameters_path}/parameters.yml', 'r') as file:
+with open('parameters/parameters.yml', 'r') as file:
     param = yaml.safe_load(file)
 
 n = []
@@ -72,7 +71,7 @@ def evaluate_tool(**parms):
     most_recent_siamese_output, _ = most_recent_file(siamese_output_path)
 
     df_siamese = format_siamese_output(siamese_output_path, most_recent_siamese_output)
-    folder_result = f'result_metrics/{algorithm}/{current_datetime}'
+    folder_result = f'results_metrics/{algorithm}/{current_datetime}'
     metrics = calculate_all_metrics(most_recent_siamese_output, df_siamese, df_clones, folder_result)
     mrr = metrics["MRR (Mean Reciprocal Rank)"]
     mop = metrics["MOP (Mean Overall Precision)"]

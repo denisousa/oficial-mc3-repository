@@ -10,10 +10,8 @@ from nsga2_utils import get_all_parameters_combination, transform_parameters_lis
 import pandas as pd
 import time
 import yaml
-import os
 
-parameters_path = os.getenv("PARAMETERS_PATH")
-with open(f'{parameters_path}/parameters.yml', 'r') as file:
+with open('parameters/parameters.yml', 'r') as file:
     search_space = yaml.safe_load(file)
 
 search_space_values = list(search_space.values())
