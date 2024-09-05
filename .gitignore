@@ -32,6 +32,15 @@ configurations/random_search/*.properties
 configurations/bayesian_search/*.properties
 configurations/nsga2/*.properties
 
+configurations/*
+datasets/*
+output/*
+parameters/*
+results_metrics/*
+results_excel/*
+time_record/*
+
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
