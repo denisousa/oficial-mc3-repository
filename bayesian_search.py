@@ -10,7 +10,6 @@ from generate_metrics import calculate_all_metrics
 from datetime import datetime
 from files_operations import most_recent_file
 import yaml
-import os
 
 with open('parameters/parameters.yml', 'r') as file:
     param = yaml.safe_load(file)

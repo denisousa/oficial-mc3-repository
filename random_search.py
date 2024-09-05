@@ -1,5 +1,5 @@
 from siamese_search import execute_siamese_search
-from datetime import datetime, timedelta
+from datetime import datetime
 from itertools import product
 import random
 import yaml

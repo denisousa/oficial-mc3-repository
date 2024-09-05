@@ -1,9 +1,6 @@
 import pandas as pd
-from os import walk
-import os
-from glob import glob
 import shutil
-from pprint import pprint
+import os
 
 
 def copy_directories(source_file, destination_folder):

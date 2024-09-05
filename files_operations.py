@@ -1,6 +1,5 @@
 import os 
 import pandas as pd
-from oracle_operations import filter_oracle
 import shutil
 
 def most_recent_file(directory):
