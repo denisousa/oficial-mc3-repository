@@ -449,8 +449,8 @@ def get_metrics(optimization_algorithms, temp):
     df_clones = filter_oracle(df_clones)
 
     for algorithm, filename_temp in zip(optimization_algorithms, temp):
-        if os.path.exists(f'result_metrics/{algorithm}/{filename_temp}'):
-            shutil.rmtree(f'result_metrics/{algorithm}/{filename_temp}')
+        if os.path.exists(f'results_metrics/{algorithm}/{filename_temp}'):
+            shutil.rmtree(f'results_metrics/{algorithm}/{filename_temp}')
         
         if os.path.exists(f'{algorithm}_result.xlsx'):
             os.remove(f'{algorithm}_result.xlsx')
@@ -458,13 +458,13 @@ def get_metrics(optimization_algorithms, temp):
         if not os.path.exists('results_excel'):
             os.mkdir('results_excel')
 
-        if not os.path.exists(f'result_metrics/{algorithm}'):
-            os.mkdir(f'result_metrics/{algorithm}')
+        if not os.path.exists(f'results_metrics/{algorithm}'):
+            os.mkdir(f'results_metrics/{algorithm}')
 
-        os.mkdir(f'result_metrics/{algorithm}/{filename_temp}')
+        os.mkdir(f'results_metrics/{algorithm}/{filename_temp}')
 
         directory = f'output/{algorithm}/{filename_temp}'
-        folder_result = f'result_metrics/{algorithm}/{filename_temp}'
+        folder_result = f'results_metrics/{algorithm}/{filename_temp}'
         results_siamese_csv = get_files_in_folder(directory)
         mrr_by_siamese_result = {}
 

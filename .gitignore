@@ -23,7 +23,7 @@ oficial_my_clusters/
 *.pdf
 new-env/
 
-result_metrics/*.csv
+results_metrics/*.csv
 my*
 
 configurations/to_index/*.properties

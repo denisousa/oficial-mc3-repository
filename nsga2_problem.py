@@ -59,7 +59,7 @@ class MyProblem(Problem):
 
             most_recent_siamese_output, _ = most_recent_file(siamese_output_path)
             df_siamese = format_siamese_output(siamese_output_path, most_recent_siamese_output)
-            folder_result = f'result_metrics/{algorithm_name}/{self.current_datetime}'
+            folder_result = f'results_metrics/{algorithm_name}/{self.current_datetime}'
             metrics = calculate_all_metrics(most_recent_siamese_output, df_siamese, df_clones, folder_result)
             
             all_mrr.append(-metrics["MRR (Mean Reciprocal Rank)"])
