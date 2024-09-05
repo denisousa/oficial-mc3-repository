@@ -1,1 +1,0 @@
-# Configurations Bayesian Search
