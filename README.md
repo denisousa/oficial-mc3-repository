@@ -29,7 +29,6 @@ The `infrastructure.md` file contains a description of the infrastructure that w
 ## Notes
 - The project works exclusively for Ubuntu
 - You can make project settings in the .env file
-- If you want to do quick tests, use `mini_qualitas_corpus_clean` which is downloaded together with the other datasets.
 - Another way to do quick experiments is to use `parameters_grid_search_mini.yml` which is a smaller version of the parameters used for grid_search.
 
 ### 1. Remove the requirement to use Sudo
@@ -79,4 +78,8 @@ At the end of the experiment execution, the summarized metrics will be placed in
 ```bash
 python main.py
 ```
+
+### 9. Fast Execution
+You need define yout parameters in /parameters/parameters_grid_search.yml
+Next, you need execute 
 

@@ -31,7 +31,7 @@ def get_ngram_by_port():
         ngram_by_port[ngram_i] = port
     return ngram_by_port
 
-def create_one_cluster_elasticserach(ngram, folder_name):
+def create_one_cluster_elasticserach(ngram):
     port = 9000 + ngram
     elasticsearch_path = os.getenv('ELASTICSEARCH_CLUSTERS')
 
@@ -39,8 +39,8 @@ def create_one_cluster_elasticserach(ngram, folder_name):
         os.makedirs(elasticsearch_path)
 
     command_delete = f'rm -rf {elasticsearch_path}/elasticsearch-ngram-{ngram}'
-    command_unzip = f'tar -xvf {folder_name}.tar.gz -C {elasticsearch_path}'
-    command_rename = f'mv {elasticsearch_path}/{folder_name} {elasticsearch_path}/elasticsearch-ngram-{ngram}'
+    command_unzip = f'tar -xvf elasticsearch-2.2.0.tar.gz -C {elasticsearch_path}'
+    command_rename = f'mv {elasticsearch_path}/elasticsearch-2.2.0 {elasticsearch_path}/elasticsearch-ngram-{ngram}'
     elasticsearch_yml_path = f'{elasticsearch_path}/elasticsearch-ngram-{ngram}/config/elasticsearch.yml'
 
     elasticsearch_in_sh_path = f'{elasticsearch_path}/elasticsearch-ngram-{ngram}/bin/elasticsearch.in.sh'

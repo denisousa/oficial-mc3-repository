@@ -33,18 +33,17 @@ datasource_list = [
         "filename": "qualitas_corpus_clean.zip",
         "file_id": "1Cvm9pYddjB6_PzzqKUd0Ri6BV-fX6MuV",
     },
-    {
-        "filename": "mini_qualitas_corpus_clean.zip",
-        "file_id": "1rph8OcDVUpBNycS_3x1bdouEX1zykdEL",
-    },
 ]
 
 def download_projects():
     for datasource in datasource_list:
-        download_file_from_google_drive(datasource["file_id"], datasource["filename"])
-        unzip_file(datasource["filename"], extract_to_path)
-        delete_folder_or_file(datasource["filename"])
-    
+        folder_name = os.path.splitext(datasource["filename"])[0]
+        folder_path = os.path.join(extract_to_path, folder_name)
+        if not os.path.exists(folder_path):
+            download_file_from_google_drive(datasource["file_id"], datasource["filename"])
+            unzip_file(datasource["filename"], extract_to_path)
+            delete_folder_or_file(datasource["filename"])
     download_elasticsearch_tar_gz()
 
-download_projects()
+if __name__ == "__main__":
+    download_projects()

@@ -23,7 +23,7 @@ def execute_siamese_index_properties(ngram):
         os.system(f'rm -rf {elastic_path}')
 
     stop_cluster_elasticserach(ngram)
-    create_one_cluster_elasticserach(ngram, elastic_version)
+    create_one_cluster_elasticserach(ngram)
     execute_cluster_elasticserach(ngram)
 
     configurations_path = "./configurations/to_index"
@@ -62,9 +62,10 @@ def execute_indexing():
         print("Execution time:", exec_time)
         open('time_execution.txt', 'a').write(f'{exec_time}\n')
 
-initial_quantity = int(os.getenv("INITIAL_CLUSTER_QUANTITY"))
-final_quantity = int(os.getenv("FINAL_CLUSTER_QUANTITY")) + 1
-clusters_range = range(initial_quantity, final_quantity)
-elastic_version = "elasticsearch-2.2.0"
 
-execute_indexing()
+if __name__ == '__main__':
+    initial_quantity = int(os.getenv("INITIAL_CLUSTER_QUANTITY"))
+    final_quantity = int(os.getenv("FINAL_CLUSTER_QUANTITY")) + 1
+    clusters_range = range(initial_quantity, final_quantity)
+
+    execute_indexing()

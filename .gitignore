@@ -5,7 +5,6 @@
 
 datasets/cut_stackoverflow_filtered
 datasets/qualitas_corpus_clean
-datasets/mini_qualitas_corpus_clean
 
 elasticsearch-ngram-*
 elasticsearch-ngram-*/*
