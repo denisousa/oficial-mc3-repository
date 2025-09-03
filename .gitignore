@@ -32,7 +32,9 @@ configurations/bayesian_search/*.properties
 configurations/nsga2/*.properties
 
 configurations/*
-datasets/*
+datasets/elasticsearch*
+datasets/qualitas_corpus_clean
+datasets/cut_stackoverflow_filtered
 output/*
 results_metrics/*
 results_excel/*
