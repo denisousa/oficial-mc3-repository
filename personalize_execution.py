@@ -18,7 +18,7 @@ def execute_indexing(ngrams):
 
 download_projects()
 
-with open('parameters/parameters_grid_search.yml', 'r') as file:
+with open('parameters/parameters_grid_search_mini.yml', 'r') as file:
     param = yaml.safe_load(file)
     param = [v for v in param.values()]
 
