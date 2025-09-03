@@ -37,7 +37,8 @@ folders = [
     "output",
     "results_metrics",
     "results_excel",
-    "time_record"
+    "time_record",
+    "time_record/grid_search"
 ]
 create_folders(folders)
 # download_projects()
