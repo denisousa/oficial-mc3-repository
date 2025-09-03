@@ -6,7 +6,6 @@ import yaml
 import datetime
 import os
 
-
 def create_folders(folder_list):
     for folder in folder_list:
         if not os.path.exists(folder):
@@ -14,8 +13,6 @@ def create_folders(folder_list):
             print(f"Folder created: {folder}")
         else:
             print(f"Folder already exists: {folder}")
-
-
 
 def execute_indexing(ngrams):
     for i in ngrams:
@@ -38,7 +35,7 @@ folders = [
 create_folders(folders)
 download_projects()
 
-with open('parameters/parameters_grid_search_mini.yml', 'r') as file:
+with open('parameters/parameters_grid_search.yml', 'r') as file:
     param = yaml.safe_load(file)
     param = [v for v in param.values()]
 
