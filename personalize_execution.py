@@ -4,6 +4,18 @@ from download_datasource import download_projects
 from siamese_indexing import execute_siamese_index_properties
 import yaml
 import datetime
+import os
+
+
+def create_folders(folder_list):
+    for folder in folder_list:
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+            print(f"Folder created: {folder}")
+        else:
+            print(f"Folder already exists: {folder}")
+
+
 
 def execute_indexing(ngrams):
     for i in ngrams:
@@ -15,7 +27,15 @@ def execute_indexing(ngrams):
         print("Execution time:", exec_time)
         open('time_execution.txt', 'a').write(f'{exec_time}\n')
 
-
+folders = [
+    "configurations",
+    "datasets",
+    "output",
+    "results_metrics",
+    "results_excel",
+    "time_record"
+]
+create_folders(folders)
 download_projects()
 
 with open('parameters/parameters_grid_search_mini.yml', 'r') as file:
