@@ -16,6 +16,13 @@ def create_folders(folder_list):
 
 def execute_indexing(ngrams):
     for i in ngrams:
+
+        elastic_base_path = os.getenv("ELASTICSEARCH_CLUSTERS")
+        elastic_path = f'{elastic_base_path}/elasticsearch-ngram-{i}'
+
+        if os.path.exists(elastic_path):
+            continue
+
         start_time = datetime.datetime.now()
         execute_siamese_index_properties(i)
         end_time = datetime.datetime.now()
@@ -33,7 +40,7 @@ folders = [
     "time_record"
 ]
 create_folders(folders)
-download_projects()
+# download_projects()
 
 with open('parameters/parameters_grid_search.yml', 'r') as file:
     param = yaml.safe_load(file)
